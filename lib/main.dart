@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.teal,
-        body: Container(),
-      ),
-    ),
-  );
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+
+        home: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.indigo,
+            title: Text('Demo'),
+          ),
+          backgroundColor: Colors.teal,
+          body: Container(),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.indigo,
+            child: Icon(
+              Icons.add,
+            ),
+          ),
+        )
+    );
+  }
 }
