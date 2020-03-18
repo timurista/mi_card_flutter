@@ -15,7 +15,16 @@ class MyApp extends StatelessWidget {
             title: Text('Demo'),
           ),
           backgroundColor: Colors.teal,
-          body: Container(),
+          body: SafeArea(
+            child: Container(
+              color: Colors.white,
+              child: Text('hello'),
+              margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 10.0),
+              padding: EdgeInsets.all(20.0),
+              height: 100,
+              width: 100,
+            ),
+          ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.indigo,
             child: Icon(
