@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,42 +42,57 @@ class MyApp extends StatelessWidget {
               Text("FULLSTACK ENGINEER", style: TextStyle(
                 fontSize: 20,
                 letterSpacing: 2.5,
-                color: Colors.indigoAccent[100],
+                color: Colors.lightBlue[100],
                 fontFamily: "Comfortaa",
               ),
               ),
 
-              SizedBox(height: 20, width: 150.0,
+              SizedBox(height: 10,),
+
+              Text("cloud • ai • web • mobile", style: TextStyle(
+                color: Colors.indigoAccent[100],
+              ),),
+
+              SizedBox(height: 30, width: 150.0,
                 child: Divider(
                 color: Colors.lightBlueAccent[100],
               ),),
 
 
+
+
               Card(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 24 ),
-                  child: ListTile(
-                    leading:  Icon(
-                      Icons.phone,
-                      color: Colors.indigo,
+                  child: RaisedButton(
+                    onPressed: _launchTelephone,
+                    child: ListTile(
+                      leading:  Image(
+                        image: AssetImage("images/slack.png"),
+                        width: 24,
+                        height: 24,
+                      ),
+                      title: Text("Request work on slack",
+                        style: TextStyle(
+                        color: Colors.indigo,
+                      ),
                     ),
-                    title: Text("+1 520 349 6601",
-                      style: TextStyle(
-                      color: Colors.indigo,
                     ),
-                  ),
                   )
                 ),
 
               Card(
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 24 ),
-                  child: ListTile(
-                    leading:  Icon(
-                      Icons.email,
-                      color: Colors.indigo,
-                    ),
-                    title: Text("timothy.urista@gmail.com",
-                      style: TextStyle(
+                  child: RaisedButton(
+                    onPressed: _launchEmail,
+                    child: ListTile(
+                      leading:  Icon(
+                        Icons.email,
                         color: Colors.indigo,
+                      ),
+                      title: Text("timothy.urista@gmail.com",
+                        style: TextStyle(
+                          color: Colors.indigo,
+                        ),
                       ),
                     ),
                   )
@@ -88,50 +103,30 @@ class MyApp extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Icon(
-                      Icons.web,
-                      color: Colors.indigo,
+                    IconButton(
+                      onPressed: () => launchURL('https://thetimurista.com'),
+                      icon: Icon(
+                        Icons.web,
+                        color: Colors.indigo,
+                      ),
                     ),
-                    Icon(
-                      Icons.cloud_queue,
-                      color: Colors.indigo,
+                    IconButton(
+                        onPressed: () => launchURL('https://github.com/timurista'),
+                      icon: ImageIcon(
+                        AssetImage("images/github.png"),
+                        color: Colors.indigo,
+                      )
                     ),
-                    Icon(
-                      Icons.mobile_screen_share,
-                      color: Colors.indigo,
+                    IconButton(
+                        onPressed: () => launchURL('https://www.linkedin.com/in/timothyurista/'),
+                        icon: ImageIcon(
+                          AssetImage("images/linkedin.png"),
+                          color: Colors.indigo,
+                        )
                     ),
-                    Icon(
-                      Icons.brush,
-                      color: Colors.indigo,
-                    )
                   ],
                 ),
               ),
-
-//              Text("places I have worked:", style: TextStyle(color: Colors.white),),
-//              Container(
-//                width: double.infinity,
-//                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-//                child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.center,
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: <Widget>[
-//                    CircleAvatar(
-//                      radius: 16,
-//                      backgroundColor: Colors.deepPurple,
-//                      backgroundImage: NetworkImage("https://lh3.googleusercontent.com/9VvTJ-UIGlggVvaEr-HvOepHLWCU2DtKs08KKJnWwfBkw60W7tOUGCMwp5Sc-VBA4Q=w300"),
-//                    ),
-//                    SizedBox(
-//                      width: 10,
-//                    ),
-//                    CircleAvatar(
-//                      radius: 16,
-//                      backgroundColor: Colors.blueAccent,
-//                      backgroundImage: NetworkImage("https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512"),
-//                    ),
-//                  ],
-//                ),
-//              ),
 
               Container(
                 width: double.infinity,
@@ -144,6 +139,24 @@ class MyApp extends StatelessWidget {
       )
       )
     );
+  }
+}
+
+_launchTelephone() async {
+  const url = 'https://join.slack.com/t/timuristafree-2jp8453/shared_invite/zt-cwsbotut-gEo2hrqF7qGEFt9r9~_SSQ';
+  await launchURL(url);
+}
+
+_launchEmail() async {
+  const url = 'mailto:timothy.urista@gmail.com';
+  await launchURL(url);
+}
+
+launchURL(url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
 
